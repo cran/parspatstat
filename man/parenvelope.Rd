@@ -21,7 +21,7 @@ Either a point pattern (\code{\link{ppp}}) object or a fitted point process mode
 }
   \item{fun}{
 %%     ~~Describe \code{\dots} here~~
-The summary statistic function on which the envelope is simulated. Parallel summary functions (\code{\link{parKest}}, \code{\link{parLest}}) can be used as well, but slaves need to be spawned on a separate communicator and specified accordingly.
+The summary statistic function on which the envelope is simulated. Parallel summary functions (e.g. \code{\link{parKest}}, \code{\link{parLest}}) can be used as well, but slaves need to be spawned on a separate communicator and specified accordingly.
 }
   \item{nsim}{
 %%     ~~Describe \code{\dots} here~~
@@ -82,4 +82,4 @@ Jonathan Lee \email{jlee253@uwo.ca}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~spatial }
+\keyword{ spatial }

@@ -12,8 +12,8 @@ Provides parallel computing functionality (using Rmpi) to some methods in the sp
 \tabular{ll}{
 Package: \tab parspatstat\cr
 Type: \tab Package\cr
-Version: \tab 0.1-2\cr
-Date: \tab 2012-09-21\cr
+Version: \tab 0.1-3\cr
+Date: \tab 2013-04-08\cr
 License: \tab GPL-2\cr
 } 
 Make sure the \code{Rmpi} package is installed correctly and slaves are spawned via \link{mpi.spawn.Rslaves} beforehand.

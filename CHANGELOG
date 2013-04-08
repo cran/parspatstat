@@ -1,0 +1,11 @@
+0.1-1
+* Initial package
+
+0.1-2
+* Added parenvelope function
+
+0.1-3
+* Added parppp class with corresponding print and plot functions
+* Added parread function for reading file into a parppp object
+* Arguments now passed via mpi.bcast.cmd command (depends on Rmpi 0.6-3) instead of globally
+* Updated parKest, parLest to work with parppp objects

@@ -13,13 +13,13 @@ parenvelope <- function(Y, fun=Kest, nsim=99, ..., job.num=2*(mpi.comm.size(comm
   if(verbose) print("No errors found, sending slaves into function") 
   
   # Have all slaves go into a function to receive the following commands from master
-  mpi.bcast.cmd(slave.parenvelope(), comm=comm)
+  mpi.bcast.cmd(cmd=slave.parenvelope, verbose=verbose, job.num=job.num, Y=Y, fun=fun, ..., communicator=comm, comm=comm)
 
   # Send number of jobs to all slaves (used for tag tracking)
-  mpi.bcast(as.integer(job.num), type=1, comm=comm)
+  #mpi.bcast(as.integer(job.num), type=1, comm=comm)
   
   # Send Y and arguments to each slave
-  mpi.bcast.Robj(list(Y=Y, fun=fun, dot.arg=list(...)), rank=0, comm=comm)
+  #mpi.bcast.Robj(list(Y=Y, fun=fun, dot.arg=list(...)), rank=0, comm=comm)
   
   if(verbose) print("Objects sent to slaves, awaiting OK status")
   
@@ -82,35 +82,36 @@ parenvelope <- function(Y, fun=Kest, nsim=99, ..., job.num=2*(mpi.comm.size(comm
 }
 
 
-slave.parenvelope <- function() {
-  if (!exists("verbose")) verbose=FALSE
+slave.parenvelope <- function(verbose=FALSE, job.num, Y, fun, ..., communicator) {
+  #if (!exists("verbose")) verbose=FALSE
   if(verbose) print("Slave initialized, awaiting global information") 
   
   # get total number of jobs from master
-  job.num <- mpi.bcast(integer(1), type=1, rank=0, comm=1)
+  #job.num <- mpi.bcast(integer(1), type=1, rank=0, comm=1)
   
   # get Y and other arguments from master
-  tmp <- mpi.bcast.Robj(rank=0, comm=1)
-  Y <- tmp$Y
-  fun <- tmp$fun
-  dotarg <- tmp$dot.arg
+  #tmp <- mpi.bcast.Robj(rank=0, comm=1)
+  #Y <- tmp$Y
+  #fun <- tmp$fun
+  #dotarg <- tmp$dot.arg
   
   # send ok status to master
-  mpi.send.Robj(obj=1, dest=0, tag=1, comm=1)
+  mpi.send.Robj(obj=1, dest=0, tag=1, comm=communicator)
   
   if(verbose) print("Global information received, retrieving number of simulations")
   
   #continually get jobs until there are no jobs left (indicated by tag)
   repeat {
-    nsim <- mpi.recv.Robj(source=0, tag=mpi.any.tag(), comm=1)
+    nsim <- mpi.recv.Robj(source=0, tag=mpi.any.tag(), comm=communicator)
     tag <- mpi.get.sourcetag()[2]
     print(tag)
     if (tag == 0)
       break
     
-    output <- try(do.call(envelope, c(list(Y=Y, fun=fun, nsim=nsim, savefuns=TRUE), dotarg)))
+    output <- envelope(Y=Y,fun=fun,nsim=nsim,savefuns=TRUE,...)
+    #output <- try(do.call(envelope, c(list(Y=Y, fun=fun, nsim=nsim, savefuns=TRUE), dotarg)))
 
-    mpi.send.Robj(obj=output, dest=0, tag=tag, comm=1)
+    mpi.send.Robj(obj=output, dest=0, tag=tag, comm=communicator)
   }
     
   if(verbose) print("Simulation complete")
