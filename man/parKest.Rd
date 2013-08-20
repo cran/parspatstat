@@ -14,7 +14,8 @@ Estimate's Ripley's reduced second moment function (K-function) and variance sta
 }
 \usage{
 parKest(X, ...)
-parKest.ppp(X, ..., job.num = 2 * (mpi.comm.size(comm) - 1), comm = 1, verbose = FALSE, load.sort=TRUE)
+parKest.ppp(X, ..., job.num = 2 * (mpi.comm.size(comm) - 1), comm = 1, 
+               verbose = FALSE, load.sort=TRUE)
 parKest.parppp(X, ..., verbose = FALSE)
 parLest(X, ...)
 }
@@ -74,7 +75,8 @@ Jonathan Lee \email{jlee253@uwo.ca}
 \code{\link{Kest}}, \code{\link{Lest}}
 }
 \examples{
-  # Generate a random point pattern of 10000 points and compute it's K-estimate using 4 slaves in parallel.
+  # Generate a random point pattern of 10000 points and compute 
+  # it's K-estimate using 4 slaves in parallel.
   \dontrun{mpi.spawn.Rslaves(nslaves=4)}
   \dontrun{mpi.bcast.cmd(require(parspatstat))}
   \dontrun{X <- runifpoint(10000)}

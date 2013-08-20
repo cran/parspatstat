@@ -10,7 +10,8 @@ Parallel Simulation Envelopes
 Computes simulation envelopes of a summary function in parallel. Slaves assumed to be already spawned via \code{\link{mpi.spawn.Rslaves}}. Usage is almost identical to the \code{\link{envelope}} function.
 }
 \usage{
-parenvelope(Y, fun=Kest, nsim=99, ..., job.num=2*(mpi.comm.size(comm)-1), verbose=FALSE, comm=1)
+parenvelope(Y, fun=Kest, nsim=99, ..., job.num=2*(mpi.comm.size(comm)-1), 
+                 verbose=FALSE, comm=1)
 }
 
 %- maybe also 'usage' for other objects documented here.

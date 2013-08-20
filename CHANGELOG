@@ -9,3 +9,7 @@
 * Added parread function for reading file into a parppp object
 * Arguments now passed via mpi.bcast.cmd command (depends on Rmpi 0.6-3) instead of globally
 * Updated parKest, parLest to work with parppp objects
+
+0.1-4
+* Added reconstruct functions
+* Moved some code to internal helper functions

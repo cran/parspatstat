@@ -76,3 +76,21 @@ pool.K <- function (...)
   #result <- Reduce(bind.fv, list(Ratio, Variance, hiCI, loCI))
   return(Ratio)
 }
+
+poissonVar <- function(n,rep=50) {
+  Ks <- numeric(0)
+  for (i in 1:rep) {
+    X <- runifpoint(n)
+    K <- Kest(X,correction="isotropic")
+    Ks <- cbind(Ks,K$iso)
+  }
+  
+  Ks.var <- apply(Ks,1,var)
+  return(Ks.var)
+}
+
+# function that returns indices of x that are within owin 'win'
+ppp.extract <- function(x,win) {
+  ind <- which(x$x > win$xrange[1] & x$x < win$xrange[2] & x$y > win$yrange[1] & x$y < win$yrange[2])
+  return(ind)  
+}

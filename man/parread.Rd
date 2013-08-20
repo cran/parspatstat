@@ -1,5 +1,6 @@
 \name{parread.ppp}
 \alias{parread.ppp}
+\alias{parread}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
@@ -11,7 +12,9 @@ Reads in a point process pattern and distributes appropriate pieces to slaves. S
 %% if parallel reading is supported, can have slaves read invidually too
 }
 \usage{
-parread.ppp(file, win, header=TRUE, sep=",", chunksize=1000, xy=c(1,2), marks=NULL, xslice=TRUE, ..., job.num=(mpi.comm.size()-1), comm=1, verbose=FALSE, localname="X.ppp")
+parread.ppp(file, win, header=TRUE, sep=",", chunksize=1000, xy=c(1,2), 
+             marks=NULL, xslice=TRUE, ..., job.num=(mpi.comm.size()-1), 
+             comm=1, verbose=FALSE, localname="X.ppp")
 }
 
 %- maybe also 'usage' for other objects documented here.
@@ -91,7 +94,8 @@ Jonathan Lee \email{jlee253@uwo.ca}
 \examples{
   \dontrun{mpi.spawn.Rslaves(nslaves=4)}
   \dontrun{mpi.bcast.cmd(require(parspatstat))}
-  \dontrun{P <- parread.ppp(file="lightning.csv",chunksize=1000, xy=c(5,6), header=TRUE, sep=",", xslice=TRUE)}
+  \dontrun{P <- parread.ppp(file="lightning.csv",chunksize=1000, xy=c(5,6),}
+  \dontrun{                 header=TRUE, sep=",", xslice=TRUE)}
   \dontrun{K.all <- parKest(X=P, verbose=TRUE)}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

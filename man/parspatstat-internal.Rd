@@ -3,6 +3,8 @@
 \alias{owin.divide}
 \alias{sample.ppp}
 \alias{pool.K}
+\alias{ppp.extract}
+\alias{poissonVar}
 \alias{slave.parKest.ppp}
 \alias{slave.parKest.parppp}
 \alias{slave.parenvelope}
